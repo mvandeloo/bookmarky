@@ -8,12 +8,16 @@ gem 'datamapper'
 gem 'dm-postgres-adapter'
 gem 'database_cleaner'
 
+
 group:development, :test do
 gem 'shotgun'
 gem 'cucumber'
 gem 'cucumber-sinatra'
 gem 'rspec'
 gem 'capybara'
+gem 'guard'
+gem 'guard-cucumber'
+gem 'guard-rspec'
 end
 
 

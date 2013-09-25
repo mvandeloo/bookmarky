@@ -1,5 +1,3 @@
-require 'bookmarky'
-
 class Link
 
 	include DataMapper::Resource

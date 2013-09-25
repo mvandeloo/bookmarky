@@ -5,12 +5,10 @@ require 'database_cleaner'
 
 
 env = ENV["RACK_ENV"] || "development"
-DataMapper.setup(:default, "postgres://localhost/bookmarky#{env}")
+DataMapper.setup(:default, "postgres://localhost/bookmarky_#{env}")
 require_relative 'link'
 DataMapper.finalize
 DataMapper.auto_upgrade!
-
-
 
 
 class Bookmarky < Sinatra::Base
@@ -21,21 +19,14 @@ get '/' do
   erb :index
 end
 
-  # start the server if ruby file executed directly
-#   run! if app_file == $0
-# end
-
 post '/links' do
-	url = params['url']
-	title = params['title']
-	Link.create(url: url, title: title)
-	redirect to '/'
+  url = params["url"]
+  title = params["title"]
+  Link.create(:url => url, :title => title)
+  redirect to('/')
 end
+
 
 run! if app_file == $0
-
-after do |scenario| 
- 	DatabaseCleaner.clean
-end
 
 end
