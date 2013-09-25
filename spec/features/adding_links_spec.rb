@@ -11,11 +11,38 @@ feature "User adds a new link" do
     expect(link.title).to eq("Makers Academy")
   end
 
-  def add_link(url, title)
+  def add_link(url, title, tags = [])
     within('#new-link') do
-      fill_in 'url', :with => url
-      fill_in 'title', :with => title
-      click_button 'Add link'
-    end      
+    fill_in 'url', :with => url
+    fill_in 'title', :with => title
+    # our tags will be space separated
+    fill_in 'tags', :with => tags.join(' ')
+    click_button 'Add link'
+    end
   end
+
+
+  scenario "with a few tags" do
+    visit "/"
+    add_link("http://www.makersacademy.com/", 
+                "Makers Academy", 
+                ['education', 'ruby'])    
+    link = Link.first
+    # expect(link.tags).to include("education")
+    # expect(link.tags).to include("ruby")
+    expect(link.tags.map(&:text)).to include("education")
+    expect(link.tags.map(&:text)).to include("ruby")
+  end
+
+
+
+  # scenario "filtered by a tag" do
+  #   visit '/tags/search'
+  #   expect(page).not_to have_content("Makers Academy")
+  #   expect(page).not_to have_content("Code.org")
+  #   expect(page).to have_content("Google")
+  #   expect(page).to have_content("Bing")
+  # end
+
+ 
 end
