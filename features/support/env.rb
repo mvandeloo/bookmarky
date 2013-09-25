@@ -2,20 +2,20 @@
 
 ENV['RACK_ENV'] = 'test'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'lib/bookmarkfuntime.rb')
+require File.join(File.dirname(__FILE__), '..', '..', 'lib/bookmarky.rb')
 
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
-Capybara.app = BookmarkFuntime
+Capybara.app = Bookmarky
 
-class BookmarkFuntimeWorld
+class BookmarkyWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
 end
 
 World do
-  BookmarkFuntimeWorld.new
+  BookmarkyWorld.new
 end

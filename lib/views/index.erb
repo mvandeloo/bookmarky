@@ -1,24 +1,8 @@
-<html>
-<head>
-<title></title>
-<body>
+<h1>Welcome to the bookmark manager</h1>
 
-<section>
-
-<ul><li> Add Bookmark </li></ul>
-	
-
-
-</section>
-
-
-
-
-
-
-
-</body>
-
-
-</head>
-</html>
+Current links:
+<ul>
+  <% @links.each do |link| %>
+    <li><a href="<%= link.url %>"><%= link.title %></a></li>
+  <% end %>
+</ul>

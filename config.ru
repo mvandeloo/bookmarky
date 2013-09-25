@@ -1,4 +1,4 @@
 require 'rubygems'
-require File.join(File.dirname(__FILE__), 'lib/bookmarkfuntime.rb')
+require File.join(File.dirname(__FILE__), 'lib/bookmarky.rb')
 
-run BookmarkFuntime
+run Bookmarky

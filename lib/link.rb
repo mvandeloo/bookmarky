@@ -1,4 +1,4 @@
-require 'bookmarkfuntime'
+require 'bookmarky'
 
 class Link
 

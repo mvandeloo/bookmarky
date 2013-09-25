@@ -5,7 +5,7 @@ describe Link do
 	context "Demonstration of how DataMapper works" do
 
 		it 'should be created and then retrieved from the db' do
-			expect(Link.count).to eq(2)
+			expect(Link.count).to eq(0)
 			Link.create(:title => "Makers Academy", :url => "http://www.makersacademy.com/")
 		expect(Link.count).to eq(1)
 		link = Link.first
@@ -14,7 +14,7 @@ describe Link do
 
 		link.destroy
 
-		expect(Link.count).to eq(2)
+		expect(Link.count).to eq(0)
 
 
 		end
