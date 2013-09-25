@@ -8,6 +8,7 @@ env = ENV["RACK_ENV"] || "development"
 DataMapper.setup(:default, "postgres://localhost/bookmarky_#{env}")
 require_relative 'link'
 require_relative 'tag'
+require_relative 'user'
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
@@ -26,6 +27,13 @@ get '/tags/:text' do
   erb :index
 end
 
+get '/users/new' do
+  # note the view is in views/users/new.erb
+  # we need the quotes because otherwise
+  # ruby would divide the symbol :users by the
+  # variable new (which makes no sense)
+  erb :"users/new"
+end
 
 post '/links' do
   url = params["url"]
@@ -36,6 +44,12 @@ post '/links' do
   Tag.first_or_create(:text => tag)
 end
 Link.create(:url => url, :title => title, :tags => tags)
+  redirect to('/')
+end
+
+post '/users' do
+  User.create(:email => params[:email], 
+              :password => params[:password])
   redirect to('/')
 end
 
