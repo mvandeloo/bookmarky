@@ -11,6 +11,7 @@ require_relative 'helpers/application'
 require_relative 'data_mapper_setup'
 
 
+
 enable :sessions
 set :session_secret, 'my unique encryption key!'
 
@@ -72,5 +73,11 @@ post '/sessions' do
     flash[:errors] = ["The email or password are incorrect"]
     erb :"sessions/new"
   end
+end
+
+delete '/sessions' do
+  flash[:notice] = "Good bye!"
+  session[:user_id] = nil
+  redirect to('/')
 end
 
