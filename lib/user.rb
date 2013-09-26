@@ -35,8 +35,8 @@ attr_accessor :password_confirmation
   # and save it in the database. This digest, provided by bcrypt,
   # has both the password hash and the salt. We save it to the 
   # database instead of the plain password for security reasons.
-  validates_uniqueness_of :email
-  property :email, String, :unique => true
+  
+  property :email, String, :unique => true, :message => "This email is already taken"
 
   def password=(password)
     @password = password
