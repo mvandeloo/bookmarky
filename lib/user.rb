@@ -1,14 +1,21 @@
-# class User
-
-#   include DataMapper::Resource
-
-#   property :id, Serial
-#   property :email, String
-  
-# end
 
 require 'bcrypt'
+
+
 class User
+attr_reader :password
+attr_accessor :password_confirmation
+
+
+
+# this is datamapper's method of validating the model.
+# The model will not be saved unless both password
+# and password_confirmation are the same
+# read more about it in the documentation
+# http://datamapper.org/docs/validations.html
+
+
+
 
   include DataMapper::Resource
 
@@ -19,6 +26,7 @@ class User
   # 50 characters by default
   # and it's not enough for the hash and salt
   property :password_digest, Text
+  validates_confirmation_of :password
 
   # when assigned the password, we don't store it directly
   # instead, we generate a password digest, that looks like this:
@@ -26,7 +34,9 @@ class User
   # and save it in the database. This digest, provided by bcrypt,
   # has both the password hash and the salt. We save it to the 
   # database instead of the plain password for security reasons.
+
   def password=(password)
+    @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 

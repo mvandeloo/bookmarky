@@ -41,5 +41,11 @@ scenario "with a password that doesn't match" do
     fill_in :password_confirmation, :with => password_confirmation
     click_button "Sign up"
   end
+
+  def password=(password)
+    @password = password
+    self.password_digest = BCrypt::Password.create(password)
+  end
+
   
 end
