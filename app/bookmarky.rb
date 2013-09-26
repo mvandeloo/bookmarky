@@ -4,6 +4,8 @@ require 'sinatra'
 require 'data_mapper'
 require './lib/link'
 require './lib/tag'
+require 'rack-flash'
+use Rack::Flash
 require './lib/user'
 require_relative 'helpers/application'
 require_relative 'data_mapper_setup'
@@ -12,16 +14,6 @@ require_relative 'data_mapper_setup'
 enable :sessions
 set :session_secret, 'my unique encryption key!'
 
-
-
-# env = ENV["RACK_ENV"] || "development"
-# DataMapper.setup(:default, "postgres://localhost/bookmarky_#{env}")
-# DataMapper.finalize
-# DataMapper.auto_upgrade!
-
-
-# class Bookmarky < Sinatra::Base
-# set :views, File.join(File.dirname(__FILE__), '..', 'views')
 
 get '/' do
   @links = Link.all
@@ -35,13 +27,8 @@ get '/tags/:text' do
 end
 
 get '/users/new' do
-  # note the view is in views/users/new.erb
-  # we need the quotes because otherwise
-  # ruby would divide the symbol :users by the
-  # variable new (which makes no sense)
+  @user = User.new
   erb :"users/new"
-
-
 end
 
 post '/links' do
@@ -59,16 +46,17 @@ end
 
 
 post '/users' do
-  user = User.create(:email => params[:email], 
+  @user = User.new(:email => params[:email], 
               :password => params[:password],
               :password_confirmation => params[:password_confirmation])  
-  session[:user_id] = user.id
-  redirect to('/')
+  if @user.save
+    session[:user_id] = @user.id
+    redirect to('/')
+  else
+    flash[:notice] = "Sorry, your passwords don't match"
+    erb :"users/new"
+  end
 end
 
 
 
-
-# run! if app_file == $0
-
-# end
