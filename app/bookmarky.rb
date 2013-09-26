@@ -49,7 +49,7 @@ Link.create(:url => url, :title => title, :tags => tags)
 end
 
 get '/users/reset_password/:token' do
-  erb :"users/reset_password"
+  erb :"users/reset_password"  
 end
 
 
