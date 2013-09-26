@@ -45,7 +45,7 @@ attr_accessor :password_confirmation
 
   def self.authenticate(email, password)
     # that's the user that's trying to sign in
-    user = first(:email => email)
+    # user = first(:email => email)
     # if this user exists and the password provided matches
     # the one we have password_digest for, everything's fine
     #
@@ -56,6 +56,15 @@ attr_accessor :password_confirmation
     # the password given and compares it to the password_digest
     # it was initialised with.
     # So, to recap: THIS IS NOT A STRING COMPARISON 
+
+    user = User.first(:email => email)
+    # why 65 and 58? Take a look at the decimal ascii table (man ascii)
+    # why 64? Just a reasonably large number
+    user.password_token = Array.new(64) {(65 + rand(58)).chr}.join
+    user.password_token_timestamp = Time.now
+    user.save
+
+
     if user && BCrypt::Password.new(user.password_digest) == password
       # return this user
       user
@@ -63,5 +72,8 @@ attr_accessor :password_confirmation
       nil
     end
   end
+
+
+  
 
 end
