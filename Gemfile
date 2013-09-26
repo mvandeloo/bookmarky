@@ -7,6 +7,7 @@ gem 'rack-flash3'
 gem 'datamapper'
 gem 'dm-postgres-adapter'
 gem 'database_cleaner'
+gem 'bcrypt-ruby'
 
 
 group:development, :test do

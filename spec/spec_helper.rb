@@ -5,11 +5,11 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 ENV["RACK_ENV"] = 'test'
-require 'bookmarky'
+require './app/bookmarky'
 require 'database_cleaner'
 require 'capybara/rspec'
 
-Capybara.app = Bookmarky
+Capybara.app = Sinatra::Application
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

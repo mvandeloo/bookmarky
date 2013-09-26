@@ -1,4 +1,4 @@
 require 'rubygems'
-require File.join(File.dirname(__FILE__), 'lib/bookmarky.rb')
+require File.join(File.dirname(__FILE__), './app/bookmarky.rb')
 
-run Bookmarky
+run Sinatra::Application
