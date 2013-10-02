@@ -4,7 +4,7 @@ env = ENV["RACK_ENV"] || "development"
 # The name will be "bookmark_manager_test" or "bookmark_manager_development" 
 # depending on the environment
 # DataMapper::Logger.new(STDOUT, :debug)
-DataMapper.setup(:default, "ec2-54-227-251-13.compute-1.amazonaws.com_#{env}")
+DataMapper.setup(:default, "postgres://localhost/bookmarky_#{env}")
 # After declaring your models, you should finalise them
 DataMapper.finalize
 

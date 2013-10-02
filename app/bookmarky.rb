@@ -4,16 +4,16 @@ require 'sinatra'
 require 'data_mapper'
 require './lib/link'
 require './lib/tag'
+require 'sinatra/partial'
 require 'rack-flash'
 use Rack::Flash
 require './lib/user'
 require_relative 'helpers/application'
 require_relative 'data_mapper_setup'
 
-
-
 enable :sessions
 set :session_secret, 'my unique encryption key!'
+set :partial_template_engine, :erb
 
 
 get '/' do
@@ -39,13 +39,13 @@ end
 post '/links' do
   url = params["url"]
   title = params["title"]
-  tags = params["tags"].split(" ").map do |tag|
-  # this will either find this tag or create
-  # it if it doesn't exist already
-  Tag.first_or_create(:text => tag)
-end
-Link.create(:url => url, :title => title, :tags => tags)
+  tags = params["tags"].split(" ").map{|tag| Tag.first_or_create(:text => tag)}
+  Link.create(:url => url, :title => title, :tags => tags)
   redirect to('/')
+end
+
+get '/links/new' do
+  erb :"links/new"
 end
 
 get '/users/reset_password/:token' do
