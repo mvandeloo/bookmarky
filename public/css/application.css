@@ -4,8 +4,7 @@
 
 body {
   font-family: Helvetica, Arial, Sans-serif;
-  background-color: white;
-  color: #f50c28;  
+  background-color: white;  
 }
 
 html, body {
@@ -23,7 +22,7 @@ html, body {
 /* no links should be underlined */
 a {
   text-decoration: none;
-  color: #ad071b;
+  color: black;
 }
 
 cursor: pointer; /* pointer looks like a hand */
@@ -36,9 +35,9 @@ cursor: pointer; /* pointer looks like a hand */
 .button {
   display: inline-block; /* display inline but have dimensions */
   width: 110px;
-  background-color: red;
+  background-color: yellow;
   border: 2px;
-  color: white; /*text colour*/
+  color: black; /*text colour*/
   text-decoration: none; /*no underlining*/
   padding: 5px 10px;
   text-align: center;
@@ -49,17 +48,15 @@ cursor: pointer; /* pointer looks like a hand */
 }
 
 
-/* a link that has both classes. Overrides the previous declaration */
-a.button.highlighted {
-  background-color: #ad071b;
-}
+
 
 header {  
-  height: 80px;
-  background-color: rgba(0,0,0,0.2);
+  height: 50px;
+  background-color: red;
   color: white;
   display: flex; /* http://learnlayout.com/flexbox.html */
   padding: 0 20px;
+  padding-top: 30px;
 }
 
   /* every immediate child to be vertically centered */
@@ -68,13 +65,19 @@ header {
   }
   header #logo {    
     display: flex;   
-    margin-right: 20px;   
+    margin-right: 20px; 
+    float: left;  
   }
 
   header a {
-    color: #de0923;
+    color: black;
   }
 
+
+/* a link that has both classes. Overrides the previous declaration */
+a.button.highlighted {
+  float: left;
+}
   header #user-links {
     flex: 1; /* http://learnlayout.com/flexbox.html */
     -webkit-flex: 1;
@@ -90,11 +93,14 @@ header {
   }
 
 #container {
-  background-color: #f50c28#f;
+  color: black;
+  background-color: blue;
   margin: 40px;
   box-shadow: 0 0 5px rgba(0,0,0,0.4);
   padding: 10px;
 }
+
+
 
 
 .link {
@@ -108,7 +114,7 @@ header {
     font-size: 24px;
     right: 5px;
     top: 5px;
-    color: #f50c28#f;
+    color: green;
     cursor: pointer;
   }
 
@@ -117,11 +123,19 @@ header {
   }
 
 .link {
-  background-color: #EEE;
+  background-color: yellow;
   box-shadow: 0 0 5px rgba(0,0,0,0.4);
   margin: 10px inherit;
   padding: 15px 10px;
 }
+
+
+.mouseover {
+  color: green; 
+}
+
+
+
 
   .link a.title {
     letter-spacing: 1px;    

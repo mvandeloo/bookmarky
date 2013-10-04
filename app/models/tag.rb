@@ -8,3 +8,4 @@ class Tag
   property :text, String
   
 end
+
